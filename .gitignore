@@ -10,7 +10,7 @@
 # ============================================================================
 
 # ============ SECURITY - SECRETS & CREDENTIALS ============
-.env                               # Environment variables with secrets
+.env
 .env.local                         # Local environment overrides
 *.key                              # Private keys
 *.pem                              # Certificate files
@@ -18,8 +18,8 @@ secrets.yaml                       # Any secrets file
 credentials.json                   # Stored credentials
 
 # ============ PYTHON ENVIRONMENTS ============
-venv/                              # Python virtual environment
-env/                               # Alternative venv directory
+venv/
+env/
 *.venv/                            # Another venv variant
 ENV/                               # Windows venv
 env.bak/                           # Backup of venv
