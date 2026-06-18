@@ -1,5 +1,18 @@
+# ============================================================================
+# NORNIR INVENTORY DEFAULTS
+# ============================================================================
+# This file contains fallback values used by all hosts unless explicitly
+# overridden at the group or host level. Values follow the inheritance chain:
+#   Host-level > Group-level > Defaults
+#
+# Use this file to set truly global defaults that apply across all devices.
+# ============================================================================
+
+# Connection credentials - fallback for all hosts (override in groups if needed)
 username: admin
-password: "{{ env_var }}"   # placeholder; real secrets come later
+password: C1sco12345   # TODO: Replace with secure credential management (e.g., .env, vault)
+
+# Custom data dictionary - arbitrary key-value pairs for your inventory
 data:
-  org: example-net
-  snmp_ro: public
+  org: example-net              # Organization identifier
+  snmp_ro: public               # SNMP read-only community string (can be overridden per group)

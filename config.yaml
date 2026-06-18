@@ -1,18 +1,42 @@
----
-inventory:
-  plugin: SimpleInventory
-    options:
-      host_file: "inventory/hosts.yaml"
-      group_file: "inventory/groups.yaml"
-      defaults_file: "inventory/defaults.yaml"
+# ============================================================================
+# NORNIR CONFIGURATION
+# ============================================================================
+# This configuration file tells Nornir:
+#   1. Where to load the inventory (hosts, groups, defaults)
+#   2. How to execute tasks (runner type and concurrency)
+#   3. How to log events
+#
+# Nornir reads this file via InitNornir(config_file='config.yaml')
+# ============================================================================
 
+---
+
+# ============ INVENTORY SECTION ============
+# Defines where and how to load device inventory
+inventory:
+  # Plugin: SimpleInventory loads YAML files; other plugins (e.g., NetBox) are available
+  plugin: SimpleInventory
+  options:
+    # Three-file model: inheritance chain = Host → Group → Defaults
+    host_file: "inventory/hosts.yaml"              # Individual devices
+    group_file: "inventory/groups.yaml"            # Shared attributes by group
+    defaults_file: "inventory/defaults.yaml"       # Global defaults
+
+# ============ RUNNER SECTION ============
+# Defines task execution strategy (serial, threaded, or async)
 runner:
+  # Plugin: threaded uses Python threads for parallel execution
+  # Other options: serial (slow), asyncio (async/await model)
   plugin: threaded
   options:
-    num_workers: 100
+    # Number of worker threads (increase for larger inventories, mind resource limits)
+    # num_workers: 10 = run up to 10 hosts concurrently
+    num_workers: 10
 
+# ============ LOGGING SECTION ============
+# Controls Nornir's logging output (task execution, errors, etc.)
 logging:
-  enabled: true
-  level: INFO
-  log_file: "nornir.log"
-  to_console: false
+  enabled: true                   # Enable logging
+  level: INFO                     # Log level: DEBUG (verbose), INFO, WARNING, ERROR
+  log_file: "nornir.log"          # File to write logs (created if not exists)
+  to_console: false               # Set true to also print logs to terminal

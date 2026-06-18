@@ -94,3 +94,25 @@ output. Deliberately break one host (wrong IP or password) and observe how Norni
 This is where you can confidently explain Nornir's architecture: pure-Python (no DSL), inventory
 inheritance, native concurrency, and the result model. Being able to draw the inventory → task →
 runner flow on a whiteboard signals you actually *use* the tool, not just quote it.
+
+
+visual output of result:
+
+result                                  ← AggregatedResult  (dict-like, keyed by hostname)
+│
+├── "site1-spine1"  ──────────────────► MultiResult  (a LIST of Result objects)
+│        │
+│        ├── [0] ───────────────────►  Result   ← your netmiko_send_command task
+│        │        ├── .result    = "Cisco IOS Software ...\nVersion 15.x ..."   ← the actual output
+│        │        ├── .host      = <Host: site1-spine1>
+│        │        ├── .name      = "netmiko_send_command"
+│        │        ├── .failed    = False
+│        │        ├── .changed   = False
+│        │        ├── .exception = None
+│        │        └── .diff      = ""
+│        │
+│        ├── [1] ───────────────────►  Result   ← only exists if the task ran a SUBTASK
+│        └── [2] ───────────────────►  Result   ← (grouped tasks). Plain commands have only [0].
+│
+├── "site1-spine2" ──► MultiResult ──► [0] ──► Result ──► .result = "..."
+└── ...

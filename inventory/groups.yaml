@@ -1,33 +1,59 @@
+# ============================================================================
+# NORNIR INVENTORY GROUPS
+# ============================================================================
+# Groups allow you to define shared attributes for multiple hosts based on:
+#   - Role/function (spine, leaf, edge, backbone)
+#   - Geography/region (eu, ap, site1, site2)
+#
+# A host can belong to multiple groups (e.g., site1-spine1 is in [spine, site1, ap]).
+# Values from all matching groups are merged; more-specific hosts/groups override defaults.
+# ============================================================================
+
+# ============ ROLE-BASED GROUPS ============
+
+# Spine switches - core layer devices
 spine:
   data:
-    snmp_ro: corp-ro
+    snmp_ro: corp-ro              # Corporate SNMP community
 
+# Leaf switches - access layer devices  
 leaf:
-  data: []
+  data: []                  # Custom leaf-specific data (example)
 
+# Edge/border devices
 edge:
-  data: []
-    
+  data: []                        # No custom data for edge devices
+
+# ============ GEOGRAPHY-BASED GROUPS ============
+
+# Europe region
 eu:
   data:
-    ntp: 10.0.0.123
-    domain: eu.example.net
+    ntp: 10.0.0.123               # NTP server for EU region
+    domain: eu.example.net        # DNS domain for EU region
   
+# Asia-Pacific region
 ap:
   data:
-    ntp: 10.100.0.123
-    domain: ap.example.net
-    snmp_ro: corp-ro
+    ntp: 10.100.0.123             # NTP server for AP region
+    domain: ap.example.net        # DNS domain for AP region
+    snmp_ro: corp-ro              # Corporate SNMP in AP region
 
+# ============ SITE-BASED GROUPS ============
+
+# Site 1 - local network
 site1:
   data:
     snmp_hosts:
-      - 10.10.20.61
-    snmp_ro: public
+      - 10.10.20.61               # SNMP trap receiver for Site 1
+    snmp_ro: public               # Site 1 uses public SNMP community
 
+# Site 2 - remote site
 site2:
-  data: []
-    
+  data: []                        # No site-specific overrides for Site 2
 
+# ============ SPECIAL GROUPS ============
+
+# Backbone/ISP interconnect devices
 backbone:
-  data: []
+  data: []                        # No custom attributes

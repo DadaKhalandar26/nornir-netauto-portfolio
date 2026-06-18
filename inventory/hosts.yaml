@@ -1,62 +1,91 @@
-site1-spine1:
-  hostname: 10.10.20.171
-  platform: nxos
-  groups: [spine, site1, ap]
-  data:
-    role: spine
+# ============================================================================
+# NORNIR INVENTORY HOSTS
+# ============================================================================
+# This file defines individual devices (hosts) in your network.
+#
+# Each host entry requires:
+#   - hostname: Management IP or FQDN of the device
+#   - platform: Netmiko/Scrapli device type (e.g., cisco_nxos, cisco_ios)
+#   - groups: List of groups this host belongs to (for inheritance)
+#   - data: (optional) Host-specific custom data
+#
+# Values inherit from groups and defaults if not specified at the host level.
+# ============================================================================
 
+# ============ SITE 1 - ASIA-PACIFIC REGION ============
+
+# Site 1 Spine 1 - Core device
+site1-spine1:
+  hostname: 10.10.20.171           # Management IP address
+  platform: cisco_nxos            # NX-OS device type for Netmiko
+  groups: [spine, site1, ap]      # Inherits from: spine role, site1 location, ap region
+  data:
+    role: spine                    # Device role for custom grouping
+
+# Site 1 Spine 2 - Core device (redundancy)
 site1-spine2:
   hostname: 10.10.20.172
-  platform: nxos
+  platform: cisco_nxos
   groups: [spine, site1, ap]
   data:
     role: spine
 
+# Site 1 Leaf 1 - Access layer
 site1-leaf1:
   hostname: 10.10.20.173
-  platform: nxos
+  platform: cisco_nxos
   groups: [leaf, site1, ap]
   data:
-    role: leaf
+    role: leaf                     # Access layer device
 
+# Site 1 Leaf 2 - Access layer
 site1-leaf2:
   hostname: 10.10.20.174
-  platform: nxos
+  platform: cisco_nxos
   groups: [leaf, site1, ap]
   data:
     role: leaf
 
+# Site 1 Leaf 3 - Access layer
 site1-leaf3:
   hostname: 10.10.20.175
-  platform: nxos
+  platform: cisco_nxos
   groups: [leaf, site1, ap]
   data:
     role: leaf
 
+# Site 1 Edge - Border/WAN device
 site1-edge1:
   hostname: 10.10.20.176
-  platform: nxos
+  platform: cisco_nxos
   groups: [edge, site1, ap]
   data:
-    role: edge
+    role: edge                     # WAN/border device
 
+# ============ BACKBONE/ISP INTERCONNECT ============
+
+# Backbone ISN 1 - ISP edge device
 backbone-isn1:
   hostname: 10.10.20.177
-  platform: nxos
-  groups: [backbone, ap]
+  platform: cisco_nxos
+  groups: [backbone, ap]          # Backbone role, AP region
   data:
-    role: edge
+    role: edge                     # External-facing ISP connection
 
+# ============ SITE 2 - EUROPE REGION ============
+
+# Site 2 Spine 1 - Core device (remote site)
 site2-spine1:
   hostname: 10.10.20.178
-  platform: nxos
-  groups: [spine, site2, eu]
+  platform: cisco_nxos
+  groups: [spine, site2, eu]      # Inherits from: spine role, site2 location, eu region
   data:
     role: spine
 
+# Site 2 Leaf 1 - Access layer (remote site)
 s2-leaf1:
   hostname: 10.10.20.179
-  platform: nxos
-  groups: [leaf, site2, eu]
+  platform: cisco_nxos
+  groups: [leaf, site2, eu]       # Inherits from: leaf role, site2 location, eu region
   data:
     role: leaf

@@ -1,3 +1,72 @@
-.env
-venv
-internal_testing/*
+# ============================================================================
+# GIT IGNORE - EXCLUDE FROM VERSION CONTROL
+# ============================================================================
+# Files/directories that should NOT be committed to git:
+#   - Secrets (passwords, API keys, .env files)
+#   - Virtual environments
+#   - Generated logs/output
+#   - IDE/editor configs
+#   - OS-specific files
+# ============================================================================
+
+# ============ SECURITY - SECRETS & CREDENTIALS ============
+.env                               # Environment variables with secrets
+.env.local                         # Local environment overrides
+*.key                              # Private keys
+*.pem                              # Certificate files
+secrets.yaml                       # Any secrets file
+credentials.json                   # Stored credentials
+
+# ============ PYTHON ENVIRONMENTS ============
+venv/                              # Python virtual environment
+env/                               # Alternative venv directory
+*.venv/                            # Another venv variant
+ENV/                               # Windows venv
+env.bak/                           # Backup of venv
+venv.bak/                          # Backup of venv
+
+# ============ PYTHON GENERATED FILES ============
+__pycache__/                       # Python cache files
+*.py[cod]                          # Compiled Python files (.pyc, .pyo, .pyd)
+*$py.class                         # Python class cache
+*.so                               # Compiled C extensions
+.Python                            # Python installation files
+build/                             # Build artifacts
+develop-eggs/                      # Setuptools development files
+dist/                              # Distribution packages
+downloads/                         # Downloaded packages
+eggs/                              # Egg files
+.eggs/                             # Egg cache
+lib/                               # Python library files
+lib64/                             # 64-bit library files
+parts/                             # Parts directory
+sdist/                             # Source distributions
+var/                               # Variable files
+wheels/                            # Wheel distributions
+*.egg-info/                        # Egg info directories
+.installed.cfg                     # Installation config
+*.egg                              # Egg files
+
+# ============ TESTING & COVERAGE ============
+.pytest_cache/                     # Pytest cache
+.coverage                          # Coverage statistics
+htmlcov/                           # Coverage HTML reports
+.tox/                              # Tox test environments
+.hypothesis/                       # Hypothesis test data
+
+# ============ IDE & EDITOR FILES ============
+.vscode/                           # VS Code settings
+.idea/                             # JetBrains IDE settings
+*.swp                              # Vim swap files
+*.swo                              # Vim backup files
+*~                                 # Emacs backup files
+.DS_Store                          # macOS metadata
+Thumbs.db                          # Windows thumbnail cache
+
+# ============ PROJECT-SPECIFIC ============
+internal_testing/*                 # Internal testing artifacts
+*.log                              # All log files
+backup/                            # Configuration backups
+*.backup                           # Backup files
+.tmp/                              # Temporary files
+nornir.log

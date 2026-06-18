@@ -1,0 +1,30 @@
+# ============================================================================
+# PROJECT DEPENDENCIES
+# ============================================================================
+# Core Nornir automation framework and plugins
+# Install with: pip install -r requirements.txt
+# ============================================================================
+
+# Core Nornir framework
+nornir>=3.0.0
+
+# Nornir utilities (printing results, filtering, etc.)
+nornir_utils>=0.1.0
+
+# Netmiko plugin - SSH-based device management (Cisco, Arista, Juniper, etc.)
+nornir-netmiko>=0.1.0
+netmiko>=4.0.0
+
+# Scrapli plugin - alternative to Netmiko (faster, async-capable)
+nornir_scrapli>=2022.1.30
+scrapli>=2022.1.30
+
+# Optional but recommended dependencies
+# For secure credential management
+python-dotenv>=0.19.0              # Load secrets from .env file
+pyyaml>=5.4.1                      # YAML parsing (usually installed with Nornir)
+
+# For development/testing (optional)
+pytest>=6.0.0                      # Unit testing framework
+pylint>=2.0.0                      # Code linting
+black>=21.0.0                      # Code formatting
